@@ -47,29 +47,33 @@
                 android:background="@drawable/button_background"
                 android:text="Level 1" />
 
-            <LinearLayout
-                android:id="@+id/layout1"
+            <HorizontalScrollView
+                android:id="@+id/scrollView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EEEEEE"
-                android:orientation="vertical"
-                android:padding="8dp"
                 android:visibility="gone">
 
-                <include
-                    android:id="@+id/cards1"
-                    layout="@layout/exercise_cards" />
-
-                <Button
-                    android:id="@+id/completeButton1"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/round_button"
-                    android:text="הצלחתי"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <Button
+                        android:id="@+id/completeButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF" />
+
+                    <include
+                        android:id="@+id/cards1"
+                        layout="@layout/exercise_cards" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <!-- שלב 2 -->
             <Button
@@ -80,29 +84,33 @@
                 android:background="@drawable/button_background"
                 android:text="Level 2" />
 
-            <LinearLayout
-                android:id="@+id/layout2"
+            <HorizontalScrollView
+                android:id="@+id/scrollView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EEEEEE"
-                android:orientation="vertical"
-                android:padding="8dp"
                 android:visibility="gone">
 
-                <include
-                    android:id="@+id/cards2"
-                    layout="@layout/exercise_cards" />
-
-                <Button
-                    android:id="@+id/completeButton2"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/round_button"
-                    android:text="הצלחתי"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <Button
+                        android:id="@+id/completeButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF" />
+
+                    <include
+                        android:id="@+id/cards2"
+                        layout="@layout/exercise_cards" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <!-- שלב 3 -->
             <Button
@@ -113,29 +121,33 @@
                 android:background="@drawable/button_background"
                 android:text="Level 3" />
 
-            <LinearLayout
-                android:id="@+id/layout3"
+            <HorizontalScrollView
+                android:id="@+id/scrollView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EEEEEE"
-                android:orientation="vertical"
-                android:padding="8dp"
                 android:visibility="gone">
 
-                <include
-                    android:id="@+id/cards3"
-                    layout="@layout/exercise_cards" />
-
-                <Button
-                    android:id="@+id/completeButton3"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/round_button"
-                    android:text="הצלחתי"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <Button
+                        android:id="@+id/completeButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF" />
+
+                    <include
+                        android:id="@+id/cards3"
+                        layout="@layout/exercise_cards" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <!-- שלב 4 -->
             <Button
@@ -146,29 +158,33 @@
                 android:background="@drawable/button_background"
                 android:text="Level 4" />
 
-            <LinearLayout
-                android:id="@+id/layout4"
+            <HorizontalScrollView
+                android:id="@+id/scrollView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EEEEEE"
-                android:orientation="vertical"
-                android:padding="8dp"
                 android:visibility="gone">
 
-                <include
-                    android:id="@+id/cards4"
-                    layout="@layout/exercise_cards" />
-
-                <Button
-                    android:id="@+id/completeButton4"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/round_button"
-                    android:text="הצלחתי"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <Button
+                        android:id="@+id/completeButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF" />
+
+                    <include
+                        android:id="@+id/cards4"
+                        layout="@layout/exercise_cards" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <!-- שלב 5 -->
             <Button
@@ -179,29 +195,33 @@
                 android:background="@drawable/button_background"
                 android:text="Level 5" />
 
-            <LinearLayout
-                android:id="@+id/layout5"
+            <HorizontalScrollView
+                android:id="@+id/scrollView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EEEEEE"
-                android:orientation="vertical"
-                android:padding="8dp"
                 android:visibility="gone">
 
-                <include
-                    android:id="@+id/cards5"
-                    layout="@layout/exercise_cards" />
-
-                <Button
-                    android:id="@+id/completeButton5"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/round_button"
-                    android:text="הצלחתי"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <Button
+                        android:id="@+id/completeButton5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF" />
+
+                    <include
+                        android:id="@+id/cards5"
+                        layout="@layout/exercise_cards" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
         </LinearLayout>
     </ScrollView>

@@ -1,96 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center">
+    android:orientation="horizontal">
 
+    <!-- כרטיס 1 -->
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:padding="2dp">
+        android:layout_marginEnd="16dp">
 
         <ImageView
             android:id="@+id/image1"
-            android:layout_width="70dp"
-            android:layout_height="72dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/muscle_upp" />
+
         <TextView
             android:id="@+id/text1"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
             android:text="הסבר 1"
-            android:textSize="14sp"
-            android:gravity="center" />
+            android:textSize="16sp" />
     </LinearLayout>
 
+    <!-- כרטיס 2 -->
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical"
-        android:padding="2dp">
+        android:layout_marginEnd="16dp">
 
         <ImageView
             android:id="@+id/image2"
-            android:layout_width="70dp"
-            android:layout_height="72dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/muscle_upp" />
+
         <TextView
             android:id="@+id/text2"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:padding="8dp"
             android:text="הסבר 2"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
+    <!-- כרטיס 3 -->
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:padding="2dp">
+        android:layout_marginEnd="16dp">
 
         <ImageView
             android:id="@+id/image3"
-            android:layout_width="70dp"
-            android:layout_height="72dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/muscle_upp" />
+
         <TextView
             android:id="@+id/text3"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
             android:text="הסבר 3"
-            android:textSize="14sp"
-            android:gravity="center" />
+            android:textSize="16sp" />
     </LinearLayout>
 
+    <!-- כרטיס 4 -->
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:padding="2dp">
+        android:layout_marginEnd="16dp">
 
         <ImageView
             android:id="@+id/image4"
-            android:layout_width="70dp"
-            android:layout_height="72dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/muscle_upp" />
+
         <TextView
             android:id="@+id/text4"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
             android:text="הסבר 4"
-            android:textSize="14sp"
-            android:gravity="center" />
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- כרטיס 5 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image5"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/muscle_upp" />
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="הסבר 5"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>
