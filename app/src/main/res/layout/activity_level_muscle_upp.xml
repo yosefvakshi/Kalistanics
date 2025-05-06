@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="שלבים לתרגיל"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/scrollBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/seekbar_progress"
+                android:thumb="@drawable/seekbar_thumb"
+                android:layout_gravity="center" />
+
+            <!-- שלב 1 -->
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_background"
+                android:text="Level 1" />
+
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EEEEEE"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/cards1"
+                    layout="@layout/exercise_cards" />
+
+                <Button
+                    android:id="@+id/completeButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_button"
+                    android:text="הצלחתי"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <!-- שלב 2 -->
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_background"
+                android:text="Level 2" />
+
+            <LinearLayout
+                android:id="@+id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EEEEEE"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/cards2"
+                    layout="@layout/exercise_cards" />
+
+                <Button
+                    android:id="@+id/completeButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_button"
+                    android:text="הצלחתי"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <!-- שלב 3 -->
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_background"
+                android:text="Level 3" />
+
+            <LinearLayout
+                android:id="@+id/layout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EEEEEE"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/cards3"
+                    layout="@layout/exercise_cards" />
+
+                <Button
+                    android:id="@+id/completeButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_button"
+                    android:text="הצלחתי"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <!-- שלב 4 -->
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_background"
+                android:text="Level 4" />
+
+            <LinearLayout
+                android:id="@+id/layout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EEEEEE"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/cards4"
+                    layout="@layout/exercise_cards" />
+
+                <Button
+                    android:id="@+id/completeButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_button"
+                    android:text="הצלחתי"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <!-- שלב 5 -->
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_background"
+                android:text="Level 5" />
+
+            <LinearLayout
+                android:id="@+id/layout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EEEEEE"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/cards5"
+                    layout="@layout/exercise_cards" />
+
+                <Button
+                    android:id="@+id/completeButton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_button"
+                    android:text="הצלחתי"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

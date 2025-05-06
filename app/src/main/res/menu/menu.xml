@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_main"
+        android:title="מסך הבית "
+        android:icon="@drawable/ic_settings"
+       />
+
+    <item
+        android:id="@+id/action_setting"
+        android:title="הגדרות "
+        android:icon="@drawable/ic_info"
+       />
+    <item
+        android:id="@+id/action_exit"
+        android:title="יציאה"
+        android:icon="@drawable/ic_info"
+        />
+</menu>
