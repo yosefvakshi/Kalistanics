@@ -1,15 +1,12 @@
 package com.example.kalistanics;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.ScrollView;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,131 +15,104 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LevelMuscleUpp extends AppCompatActivity {
-    private ScrollView scrollView;
-    private SeekBar seekBar;
-    private DatabaseHelper dbHelper;
-    private long challengeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_muscle_upp);
 
-        dbHelper = new DatabaseHelper(this);
-        challengeId = getIntent().getLongExtra("challenge_id", -1);
+        // הגדרת כפתורים
+        Button button1 = findViewById(R.id.button1);
+        Button button2 = findViewById(R.id.button2);
+        Button button3 = findViewById(R.id.button3);
+        Button button4 = findViewById(R.id.button4);
+        Button button5 = findViewById(R.id.button5);
 
-        if (challengeId == -1) {
-            Toast.makeText(this, "שגיאה: לא נמצא מזהה אתגר", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+        // הגדרת תצוגות אופקיות
+        HorizontalScrollView scrollView1 = findViewById(R.id.scrollView1);
+        HorizontalScrollView scrollView2 = findViewById(R.id.scrollView2);
+        HorizontalScrollView scrollView3 = findViewById(R.id.scrollView3);
+        HorizontalScrollView scrollView4 = findViewById(R.id.scrollView4);
+        HorizontalScrollView scrollView5 = findViewById(R.id.scrollView5);
 
-        scrollView = findViewById(R.id.main);
-        seekBar = findViewById(R.id.scrollBar);
+        // הגדרת כפתורי השלמה
+        Button completeButton1 = findViewById(R.id.completeButton1);
+        Button completeButton2 = findViewById(R.id.completeButton2);
+        Button completeButton3 = findViewById(R.id.completeButton3);
+        Button completeButton4 = findViewById(R.id.completeButton4);
+        Button completeButton5 = findViewById(R.id.completeButton5);
 
-        loadLevelsFromDatabase();
+        // הגדרת תמונות
+        ImageView image1 = findViewById(R.id.image1);
+        ImageView image2 = findViewById(R.id.image2);
+        ImageView image3 = findViewById(R.id.image3);
+        ImageView image4 = findViewById(R.id.image4);
+
+        // הגדרת טקסטים
+        TextView text1 = findViewById(R.id.text1);
+        TextView text2 = findViewById(R.id.text2);
+        TextView text3 = findViewById(R.id.text3);
+        TextView text4 = findViewById(R.id.text4);
+
+        // הגדרת תמונות
+        image1.setImageResource(R.drawable.muscle_upp);
+        image2.setImageResource(R.drawable.muscle_upp);
+        image3.setImageResource(R.drawable.muscle_upp);
+        image4.setImageResource(R.drawable.muscle_upp);
+
+        // הגדרת טקסטים
+        text1.setText("הסבר 1");
+        text2.setText("הסבר 2");
+        text3.setText("הסבר 3");
+        text4.setText("הסבר 4");
+
+        // הגדרת כפתורים
+        setupButton(button1, scrollView1, completeButton1);
+        setupButton(button2, scrollView2, completeButton2);
+        setupButton(button3, scrollView3, completeButton3);
+        setupButton(button4, scrollView4, completeButton4);
+        setupButton(button5, scrollView5, completeButton5);
     }
 
-    private void loadLevelsFromDatabase() {
-        Cursor cursor = dbHelper.getLevelsForChallenge(challengeId);
-        
-        while (cursor.moveToNext()) {
-            long levelId = cursor.getLong(cursor.getColumnIndexOrThrow("_id"));
-            String levelName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-            int levelNumber = cursor.getInt(cursor.getColumnIndexOrThrow("level_number"));
-            boolean isCompleted = cursor.getInt(cursor.getColumnIndexOrThrow("is_completed")) == 1;
+    private void setupButton(Button button, HorizontalScrollView scrollView, Button completeButton) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // הסתרת כל התצוגות האופקיות
+                findViewById(R.id.scrollView1).setVisibility(View.GONE);
+                findViewById(R.id.scrollView2).setVisibility(View.GONE);
+                findViewById(R.id.scrollView3).setVisibility(View.GONE);
+                findViewById(R.id.scrollView4).setVisibility(View.GONE);
+                findViewById(R.id.scrollView5).setVisibility(View.GONE);
 
-            // מציאת הכפתור המתאים לפי מספר הרמה
-            String buttonId = "button" + levelNumber;
-            int resId = getResources().getIdentifier(buttonId, "id", getPackageName());
-            Button button = findViewById(resId);
-
-            if (button != null) {
-                button.setText(levelName);
-                setupButton(button, levelId, levelNumber, isCompleted);
+                // הצגת התצוגה האופקית הנבחרת
+                scrollView.setVisibility(View.VISIBLE);
             }
-        }
-        cursor.close();
-    }
+        });
 
-    private void setupButton(Button button, long levelId, int levelNumber, boolean isCompleted) {
-        // מציאת ה-layout המתאים לפי מספר הרמה
-        String layoutId = "layout" + levelNumber;
-        int resId = getResources().getIdentifier(layoutId, "id", getPackageName());
-        LinearLayout layout = findViewById(resId);
-
-        if (layout != null) {
-            button.setOnClickListener(v -> {
-                if (layout.getVisibility() == View.VISIBLE) {
-                    layout.setVisibility(View.GONE);
-                } else {
-                    layout.setVisibility(View.VISIBLE);
-                    loadTrainings(levelId, layout);
-                }
-            });
-
-            // מציאת כפתור ההשלמה
-            String completeButtonId = "completeButton" + levelNumber;
-            int completeButtonResId = getResources().getIdentifier(completeButtonId, "id", getPackageName());
-            Button completeButton = findViewById(completeButtonResId);
-
-            if (completeButton != null) {
-                completeButton.setOnClickListener(v -> {
-                    dbHelper.updateLevelCompletion(levelId, true);
-                    Toast.makeText(this, "כל הכבוד! השלמת את הרמה", Toast.LENGTH_SHORT).show();
-                    completeButton.setEnabled(false);
-                });
+        completeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LevelMuscleUpp.this, "כל הכבוד! השלמת את השלב", Toast.LENGTH_SHORT).show();
+                completeButton.setEnabled(false);
             }
-        }
-    }
-
-    private void loadTrainings(long levelId, LinearLayout layout) {
-        Cursor cursor = dbHelper.getTrainingsForLevel(levelId);
-        
-        while (cursor.moveToNext()) {
-            int imageResId = cursor.getInt(cursor.getColumnIndexOrThrow("image"));
-            String explanation = cursor.getString(cursor.getColumnIndexOrThrow("explanation"));
-
-            // מציאת ה-ImageView וה-TextView המתאימים
-            String imageId = "image" + (cursor.getPosition() + 1);
-            String textId = "text" + (cursor.getPosition() + 1);
-            
-            int imageResId2 = getResources().getIdentifier(imageId, "id", getPackageName());
-            int textResId = getResources().getIdentifier(textId, "id", getPackageName());
-            
-            ImageView imageView = layout.findViewById(imageResId2);
-            TextView textView = layout.findViewById(textResId);
-
-            if (imageView != null && textView != null) {
-                imageView.setImageResource(imageResId);
-                textView.setText(explanation);
-            }
-        }
-        cursor.close();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (dbHelper != null) {
-            dbHelper.close();
-        }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
         return true;
     }
 
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_exit) {
-            finishAffinity(); // סוגר את כל האקטיביטיז ויוצא מהאפליקציה
+            finishAffinity();
             return true;
         } else if (item.getItemId() == R.id.action_main) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
