@@ -20,7 +20,14 @@
             android:id="@+id/scrollView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/container1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
 
         <Button
             android:id="@+id/completeButton1"
@@ -41,7 +48,14 @@
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/container2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
 
         <Button
             android:id="@+id/completeButton2"
@@ -62,7 +76,14 @@
             android:id="@+id/scrollView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/container3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
 
         <Button
             android:id="@+id/completeButton3"
@@ -83,7 +104,14 @@
             android:id="@+id/scrollView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/container4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
 
         <Button
             android:id="@+id/completeButton4"
@@ -104,7 +132,14 @@
             android:id="@+id/scrollView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/container5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
 
         <Button
             android:id="@+id/completeButton5"

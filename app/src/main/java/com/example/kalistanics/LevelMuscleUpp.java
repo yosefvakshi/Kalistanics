@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
 public class LevelMuscleUpp extends AppCompatActivity {
     private HorizontalScrollView scrollView1, scrollView2, scrollView3, scrollView4, scrollView5;
     private Button button1, button2, button3, button4, button5;
@@ -34,8 +36,6 @@ public class LevelMuscleUpp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_muscle_upp);
 
-        dbHelper = new DatabaseHelper(this);
-
         // קבלת מזהה האתגר מה-Intent
         currentChallengeId = getIntent().getLongExtra("challenge_id", -1);
         if (currentChallengeId == -1) {
@@ -43,6 +43,8 @@ public class LevelMuscleUpp extends AppCompatActivity {
             finish();
             return;
         }
+
+        android.util.Log.d("LevelMuscleUpp", "Current challenge ID: " + currentChallengeId);
 
         // אתחול כפתורים
         button1 = findViewById(R.id.button1);
@@ -65,15 +67,27 @@ public class LevelMuscleUpp extends AppCompatActivity {
         scrollView4 = findViewById(R.id.scrollView4);
         scrollView5 = findViewById(R.id.scrollView5);
 
-        // טעינת נתונים מהמסד
-        loadLevelData();
-
         // הגדרת מאזיני לחיצה לכפתורים
-        button1.setOnClickListener(v -> toggleLevel(1));
-        button2.setOnClickListener(v -> toggleLevel(2));
-        button3.setOnClickListener(v -> toggleLevel(3));
-        button4.setOnClickListener(v -> toggleLevel(4));
-        button5.setOnClickListener(v -> toggleLevel(5));
+        button1.setOnClickListener(v -> {
+            android.util.Log.d("LevelMuscleUpp", "Button 1 clicked");
+            toggleLevel(1);
+        });
+        button2.setOnClickListener(v -> {
+            android.util.Log.d("LevelMuscleUpp", "Button 2 clicked");
+            toggleLevel(2);
+        });
+        button3.setOnClickListener(v -> {
+            android.util.Log.d("LevelMuscleUpp", "Button 3 clicked");
+            toggleLevel(3);
+        });
+        button4.setOnClickListener(v -> {
+            android.util.Log.d("LevelMuscleUpp", "Button 4 clicked");
+            toggleLevel(4);
+        });
+        button5.setOnClickListener(v -> {
+            android.util.Log.d("LevelMuscleUpp", "Button 5 clicked");
+            toggleLevel(5);
+        });
 
         // הגדרת מאזיני לחיצה לכפתורי הצלחה
         completeButton1.setOnClickListener(v -> handleLevelCompletion(1));
@@ -81,67 +95,242 @@ public class LevelMuscleUpp extends AppCompatActivity {
         completeButton3.setOnClickListener(v -> handleLevelCompletion(3));
         completeButton4.setOnClickListener(v -> handleLevelCompletion(4));
         completeButton5.setOnClickListener(v -> handleLevelCompletion(5));
+
+        // אתחול מסד הנתונים וטעינת נתונים
+        dbHelper = new DatabaseHelper(this);
+        
+        // טעינת נתונים
+        loadLevelData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            // בדיקת תקינות מסד הנתונים
+            dbHelper.validateDatabase();
+        } catch (Exception e) {
+            android.util.Log.e("LevelMuscleUpp", "Error validating database: " + e.getMessage());
+        }
     }
 
     private void loadLevelData() {
-        // טעינת נתונים לכל שלב
-        loadTrainingsForLevel(1, scrollView1);
-        loadTrainingsForLevel(2, scrollView2);
-        loadTrainingsForLevel(3, scrollView3);
-        loadTrainingsForLevel(4, scrollView4);
-        loadTrainingsForLevel(5, scrollView5);
+        try {
+            android.util.Log.d("LevelMuscleUpp", "Starting to load level data for challenge " + currentChallengeId);
+            
+            // טעינת נתונים לכל שלב
+            loadTrainingsForLevel(1, scrollView1);
+            loadTrainingsForLevel(2, scrollView2);
+            loadTrainingsForLevel(3, scrollView3);
+            loadTrainingsForLevel(4, scrollView4);
+            loadTrainingsForLevel(5, scrollView5);
+            
+            android.util.Log.d("LevelMuscleUpp", "Finished loading level data");
+        } catch (Exception e) {
+            android.util.Log.e("LevelMuscleUpp", "Error loading level data: " + e.getMessage());
+            e.printStackTrace();
+            Toast.makeText(this, "שגיאה בטעינת הנתונים", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadTrainingsForLevel(int levelNumber, HorizontalScrollView scrollView) {
-        // יצירת מיכל לתרגילים
-        LinearLayout container = new LinearLayout(this);
-        container.setOrientation(LinearLayout.HORIZONTAL);
-        scrollView.addView(container);
-
-        // קבלת התרגילים מהמסד
-        Cursor cursor = dbHelper.getTrainingsForLevel(levelNumber);
-        while (cursor.moveToNext()) {
-            String description = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TRAINING_DESCRIPTION));
-            String imageName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TRAINING_IMAGE));
-
-            // יצירת תצוגת תרגיל
-            View exerciseView = getLayoutInflater().inflate(R.layout.exercise_cards, container, false);
+        try {
+            android.util.Log.d("LevelMuscleUpp", "Loading trainings for level " + levelNumber);
             
-            ImageView imageView = exerciseView.findViewById(R.id.image1);
-            TextView textView = exerciseView.findViewById(R.id.text1);
+            // יצירת מיכל לתרגילים
+            LinearLayout container = scrollView.findViewById(getResources().getIdentifier("container" + levelNumber, "id", getPackageName()));
+            if (container == null) {
+                android.util.Log.e("LevelMuscleUpp", "Container not found for level " + levelNumber);
+                return;
+            }
 
-            // הגדרת תמונה וטקסט
-            int imageResource = getResources().getIdentifier(imageName, "drawable", getPackageName());
-            imageView.setImageResource(imageResource);
-            textView.setText(description);
+            // ניקוי המיכל לפני טעינת תרגילים חדשים
+            container.removeAllViews();
+            android.util.Log.d("LevelMuscleUpp", "Cleared container for level " + levelNumber);
 
-            container.addView(exerciseView);
+            // חישוב ה-level_id הנכון בהתאם לאתגר הנוכחי
+            long levelId;
+            if (currentChallengeId == 1) { // Muscle Up
+                levelId = levelNumber;
+            } else if (currentChallengeId == 2) { // Pull Up
+                levelId = levelNumber + 5;
+            } else if (currentChallengeId == 3) { // Push Up
+                levelId = levelNumber + 10;
+            } else if (currentChallengeId == 4) { // Dip
+                levelId = levelNumber + 15;
+            } else {
+                android.util.Log.e("LevelMuscleUpp", "Invalid challenge ID: " + currentChallengeId);
+                return;
+            }
+
+            android.util.Log.d("LevelMuscleUpp", "Loading trainings for level " + levelNumber + " (level_id: " + levelId + ", challenge_id: " + currentChallengeId + ")");
+
+            // קבלת התרגילים מהמסד
+            Cursor cursor = dbHelper.getTrainingsForLevel(levelId);
+            if (cursor != null) {
+                android.util.Log.d("LevelMuscleUpp", "Cursor returned with " + cursor.getCount() + " rows");
+                
+                // קבלת אינדקסי העמודות
+                int descriptionIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_TRAINING_DESCRIPTION);
+                int imageIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_TRAINING_IMAGE);
+                
+                if (descriptionIndex == -1 || imageIndex == -1) {
+                    android.util.Log.e("LevelMuscleUpp", "Column not found: description=" + descriptionIndex + ", image=" + imageIndex);
+                    cursor.close();
+                    return;
+                }
+
+                int count = 0;
+                while (cursor.moveToNext()) {
+                    try {
+                        String description = cursor.getString(descriptionIndex);
+                        String imageName = cursor.getString(imageIndex);
+
+                        android.util.Log.d("LevelMuscleUpp", "Found training: " + description + " with image: " + imageName);
+
+                        // יצירת תצוגת תרגיל
+                        View exerciseView = getLayoutInflater().inflate(R.layout.exercise_cards, container, false);
+                        
+                        ImageView imageView = exerciseView.findViewById(R.id.image1);
+                        TextView textView = exerciseView.findViewById(R.id.text1);
+
+                        // הגדרת תמונה וטקסט
+                        android.util.Log.d("LevelMuscleUpp", "Found image name: " + imageName);
+                        
+                        // ניסיון לטעון את התמונה
+                        try {
+                            // המרת שם התמונה לפורמט הנכון
+                            String formattedImageName = imageName.replace("_upp_", "upp");
+                            android.util.Log.d("LevelMuscleUpp", "Formatted image name: " + formattedImageName);
+                            
+                            // נסה לטעון את התמונה עם סיומת PNG
+                            int imageResource = getResources().getIdentifier(formattedImageName, "drawable", getPackageName());
+                            android.util.Log.d("LevelMuscleUpp", "Resource ID for " + formattedImageName + ": " + imageResource);
+                            
+                            if (imageResource != 0) {
+                                imageView.setImageResource(imageResource);
+                                android.util.Log.d("LevelMuscleUpp", "Successfully loaded image using resource ID");
+                            } else {
+                                android.util.Log.e("LevelMuscleUpp", "Image resource not found: " + formattedImageName);
+                                
+                                // נסה לטעון את התמונה עם סיומת JPG
+                                try {
+                                    String imagePath = formattedImageName + ".jpg";
+                                    android.util.Log.d("LevelMuscleUpp", "Trying to load image: " + imagePath);
+                                    
+                                    // נסה לטעון מתיקיית drawable
+                                    try {
+                                        java.io.InputStream is = getResources().openRawResource(
+                                            getResources().getIdentifier(formattedImageName, "raw", getPackageName())
+                                        );
+                                        android.graphics.Bitmap bitmap = android.graphics.BitmapFactory.decodeStream(is);
+                                        imageView.setImageBitmap(bitmap);
+                                        is.close();
+                                        android.util.Log.d("LevelMuscleUpp", "Successfully loaded image from raw resources");
+                                    } catch (Exception e) {
+                                        android.util.Log.e("LevelMuscleUpp", "Failed to load from raw resources: " + e.getMessage());
+                                        
+                                        // נסה לטעון מתיקיית assets
+                                        try {
+                                            java.io.InputStream is = getAssets().open(imagePath);
+                                            android.graphics.Bitmap bitmap = android.graphics.BitmapFactory.decodeStream(is);
+                                            imageView.setImageBitmap(bitmap);
+                                            is.close();
+                                            android.util.Log.d("LevelMuscleUpp", "Successfully loaded image from assets");
+                                        } catch (Exception e2) {
+                                            android.util.Log.e("LevelMuscleUpp", "Failed to load from assets: " + e2.getMessage());
+                                            
+                                            // נסה לטעון מהקובץ ישירות
+                                            try {
+                                                java.io.File file = new java.io.File(getFilesDir(), imagePath);
+                                                if (file.exists()) {
+                                                    android.graphics.Bitmap bitmap = android.graphics.BitmapFactory.decodeFile(file.getAbsolutePath());
+                                                    imageView.setImageBitmap(bitmap);
+                                                    android.util.Log.d("LevelMuscleUpp", "Successfully loaded image from file");
+                                                } else {
+                                                    android.util.Log.e("LevelMuscleUpp", "Image file not found: " + file.getAbsolutePath());
+                                                }
+                                            } catch (Exception e3) {
+                                                android.util.Log.e("LevelMuscleUpp", "Failed to load from file: " + e3.getMessage());
+                                            }
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    android.util.Log.e("LevelMuscleUpp", "Error loading image: " + e.getMessage());
+                                }
+                            }
+                        } catch (Exception e) {
+                            android.util.Log.e("LevelMuscleUpp", "Error loading image: " + e.getMessage());
+                        }
+                        textView.setText(description);
+
+                        container.addView(exerciseView);
+                        count++;
+                    } catch (Exception e) {
+                        android.util.Log.e("LevelMuscleUpp", "Error processing training: " + e.getMessage());
+                    }
+                }
+                android.util.Log.d("LevelMuscleUpp", "Loaded " + count + " exercises for level " + levelNumber);
+                cursor.close();
+            } else {
+                android.util.Log.e("LevelMuscleUpp", "No cursor returned for level " + levelNumber);
+            }
+        } catch (Exception e) {
+            android.util.Log.e("LevelMuscleUpp", "Error loading trainings for level " + levelNumber + ": " + e.getMessage());
+            e.printStackTrace();
         }
-        cursor.close();
     }
 
     private void toggleLevel(int level) {
+        android.util.Log.d("LevelMuscleUpp", "Toggling level " + level);
+        HorizontalScrollView scrollView = null;
+        boolean isOpen = false;
+
         switch (level) {
             case 1:
+                scrollView = scrollView1;
+                isOpen = isLevel1Open;
                 isLevel1Open = !isLevel1Open;
-                scrollView1.setVisibility(isLevel1Open ? View.VISIBLE : View.GONE);
                 break;
             case 2:
+                scrollView = scrollView2;
+                isOpen = isLevel2Open;
                 isLevel2Open = !isLevel2Open;
-                scrollView2.setVisibility(isLevel2Open ? View.VISIBLE : View.GONE);
                 break;
             case 3:
+                scrollView = scrollView3;
+                isOpen = isLevel3Open;
                 isLevel3Open = !isLevel3Open;
-                scrollView3.setVisibility(isLevel3Open ? View.VISIBLE : View.GONE);
                 break;
             case 4:
+                scrollView = scrollView4;
+                isOpen = isLevel4Open;
                 isLevel4Open = !isLevel4Open;
-                scrollView4.setVisibility(isLevel4Open ? View.VISIBLE : View.GONE);
                 break;
             case 5:
+                scrollView = scrollView5;
+                isOpen = isLevel5Open;
                 isLevel5Open = !isLevel5Open;
-                scrollView5.setVisibility(isLevel5Open ? View.VISIBLE : View.GONE);
                 break;
+        }
+
+        if (scrollView != null) {
+            android.util.Log.d("LevelMuscleUpp", "Setting visibility for level " + level + " to " + (!isOpen ? "VISIBLE" : "GONE"));
+            scrollView.setVisibility(!isOpen ? View.VISIBLE : View.GONE);
+            
+            // בדיקה שהתרגילים נטענו
+            LinearLayout container = scrollView.findViewById(getResources().getIdentifier("container" + level, "id", getPackageName()));
+            if (container != null) {
+                android.util.Log.d("LevelMuscleUpp", "Container " + level + " has " + container.getChildCount() + " children");
+                if (container.getChildCount() == 0) {
+                    android.util.Log.d("LevelMuscleUpp", "Reloading trainings for level " + level);
+                    loadTrainingsForLevel(level, scrollView);
+                }
+            } else {
+                android.util.Log.e("LevelMuscleUpp", "Container " + level + " not found");
+            }
+        } else {
+            android.util.Log.e("LevelMuscleUpp", "ScrollView is null for level " + level);
         }
     }
 

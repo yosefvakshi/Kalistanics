@@ -16,8 +16,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // יצירת מסד הנתונים
         dbHelper = new DatabaseHelper(this);
-
+        
         // הגדרת כפתורים
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
@@ -33,17 +34,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void openChallenge(int challengeNumber) {
         // קבלת מזהה האתגר מהמסד
-        Cursor cursor = dbHelper.getAllChallenges();
-        if (cursor.moveToPosition(challengeNumber - 1)) {
-            long challengeId = cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COLUMN_CHALLENGE_ID));
-            cursor.close();
+        Cursor cursor = null;
+        try {
+            // בדיקה שהמספר חוקי
+            if (challengeNumber < 1 || challengeNumber > 4) {
+                Toast.makeText(this, "שגיאה: מספר אתגר לא חוקי", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             // פתיחת דף השלבים עם מזהה האתגר
             Intent intent = new Intent(this, LevelMuscleUpp.class);
-            intent.putExtra("challenge_id", challengeId);
+            intent.putExtra("challenge_id", (long)challengeNumber);  // המרה מפורשת ל-Long
             startActivity(intent);
-        } else {
-            Toast.makeText(this, "שגיאה בטעינת האתגר", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            android.util.Log.e("MainActivity", "Error opening challenge: " + e.getMessage());
+            Toast.makeText(this, "שגיאה: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
     }
 
