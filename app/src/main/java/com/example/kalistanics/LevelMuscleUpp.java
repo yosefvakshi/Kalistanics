@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,88 +16,141 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LevelMuscleUpp extends AppCompatActivity {
+    private HorizontalScrollView scrollView1, scrollView2, scrollView3, scrollView4, scrollView5;
+    private Button button1, button2, button3, button4, button5;
+    private Button completeButton1, completeButton2, completeButton3, completeButton4, completeButton5;
+    private boolean isLevel1Open = false;
+    private boolean isLevel2Open = false;
+    private boolean isLevel3Open = false;
+    private boolean isLevel4Open = false;
+    private boolean isLevel5Open = false;
+    private boolean[] isCompleted = new boolean[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_muscle_upp);
 
-        // הגדרת כפתורים
-        Button button1 = findViewById(R.id.button1);
-        Button button2 = findViewById(R.id.button2);
-        Button button3 = findViewById(R.id.button3);
-        Button button4 = findViewById(R.id.button4);
-        Button button5 = findViewById(R.id.button5);
+        // אתחול כפתורים
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        button3 = findViewById(R.id.button3);
+        button4 = findViewById(R.id.button4);
+        button5 = findViewById(R.id.button5);
 
-        // הגדרת תצוגות אופקיות
-        HorizontalScrollView scrollView1 = findViewById(R.id.scrollView1);
-        HorizontalScrollView scrollView2 = findViewById(R.id.scrollView2);
-        HorizontalScrollView scrollView3 = findViewById(R.id.scrollView3);
-        HorizontalScrollView scrollView4 = findViewById(R.id.scrollView4);
-        HorizontalScrollView scrollView5 = findViewById(R.id.scrollView5);
+        // אתחול כפתורי הצלחה
+        completeButton1 = findViewById(R.id.completeButton1);
+        completeButton2 = findViewById(R.id.completeButton2);
+        completeButton3 = findViewById(R.id.completeButton3);
+        completeButton4 = findViewById(R.id.completeButton4);
+        completeButton5 = findViewById(R.id.completeButton5);
 
-        // הגדרת כפתורי השלמה
-        Button completeButton1 = findViewById(R.id.completeButton1);
-        Button completeButton2 = findViewById(R.id.completeButton2);
-        Button completeButton3 = findViewById(R.id.completeButton3);
-        Button completeButton4 = findViewById(R.id.completeButton4);
-        Button completeButton5 = findViewById(R.id.completeButton5);
+        // אתחול אזורי גלילה
+        scrollView1 = findViewById(R.id.scrollView1);
+        scrollView2 = findViewById(R.id.scrollView2);
+        scrollView3 = findViewById(R.id.scrollView3);
+        scrollView4 = findViewById(R.id.scrollView4);
+        scrollView5 = findViewById(R.id.scrollView5);
 
-        // הגדרת תמונות
-        ImageView image1 = findViewById(R.id.image1);
-        ImageView image2 = findViewById(R.id.image2);
-        ImageView image3 = findViewById(R.id.image3);
-        ImageView image4 = findViewById(R.id.image4);
+        // הגדרת מאזיני לחיצה לכפתורים
+        button1.setOnClickListener(v -> toggleLevel(1));
+        button2.setOnClickListener(v -> toggleLevel(2));
+        button3.setOnClickListener(v -> toggleLevel(3));
+        button4.setOnClickListener(v -> toggleLevel(4));
+        button5.setOnClickListener(v -> toggleLevel(5));
 
-        // הגדרת טקסטים
-        TextView text1 = findViewById(R.id.text1);
-        TextView text2 = findViewById(R.id.text2);
-        TextView text3 = findViewById(R.id.text3);
-        TextView text4 = findViewById(R.id.text4);
+        // הגדרת מאזיני לחיצה לכפתורי הצלחה
+        completeButton1.setOnClickListener(v -> handleLevelCompletion(1));
+        completeButton2.setOnClickListener(v -> handleLevelCompletion(2));
+        completeButton3.setOnClickListener(v -> handleLevelCompletion(3));
+        completeButton4.setOnClickListener(v -> handleLevelCompletion(4));
+        completeButton5.setOnClickListener(v -> handleLevelCompletion(5));
 
-        // הגדרת תמונות
-        image1.setImageResource(R.drawable.muscle_upp);
-        image2.setImageResource(R.drawable.muscle_upp);
-        image3.setImageResource(R.drawable.muscle_upp);
-        image4.setImageResource(R.drawable.muscle_upp);
+        // הגדרת מאזין לשינוי ב-SeekBar
+        SeekBar scrollBar = findViewById(R.id.scrollBar);
+        scrollBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    int maxScroll = scrollView1.getChildAt(0).getWidth() - scrollView1.getWidth();
+                    int scrollTo = (progress * maxScroll) / 100;
+                    scrollView1.scrollTo(scrollTo, 0);
+                }
+            }
 
-        // הגדרת טקסטים
-        text1.setText("הסבר 1");
-        text2.setText("הסבר 2");
-        text3.setText("הסבר 3");
-        text4.setText("הסבר 4");
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
-        // הגדרת כפתורים
-        setupButton(button1, scrollView1, completeButton1);
-        setupButton(button2, scrollView2, completeButton2);
-        setupButton(button3, scrollView3, completeButton3);
-        setupButton(button4, scrollView4, completeButton4);
-        setupButton(button5, scrollView5, completeButton5);
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
     }
 
-    private void setupButton(Button button, HorizontalScrollView scrollView, Button completeButton) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // הסתרת כל התצוגות האופקיות
-                findViewById(R.id.scrollView1).setVisibility(View.GONE);
-                findViewById(R.id.scrollView2).setVisibility(View.GONE);
-                findViewById(R.id.scrollView3).setVisibility(View.GONE);
-                findViewById(R.id.scrollView4).setVisibility(View.GONE);
-                findViewById(R.id.scrollView5).setVisibility(View.GONE);
+    private void toggleLevel(int level) {
+        switch (level) {
+            case 1:
+                isLevel1Open = !isLevel1Open;
+                scrollView1.setVisibility(isLevel1Open ? View.VISIBLE : View.GONE);
+                break;
+            case 2:
+                isLevel2Open = !isLevel2Open;
+                scrollView2.setVisibility(isLevel2Open ? View.VISIBLE : View.GONE);
+                break;
+            case 3:
+                isLevel3Open = !isLevel3Open;
+                scrollView3.setVisibility(isLevel3Open ? View.VISIBLE : View.GONE);
+                break;
+            case 4:
+                isLevel4Open = !isLevel4Open;
+                scrollView4.setVisibility(isLevel4Open ? View.VISIBLE : View.GONE);
+                break;
+            case 5:
+                isLevel5Open = !isLevel5Open;
+                scrollView5.setVisibility(isLevel5Open ? View.VISIBLE : View.GONE);
+                break;
+        }
+    }
 
-                // הצגת התצוגה האופקית הנבחרת
-                scrollView.setVisibility(View.VISIBLE);
-            }
-        });
+    private void handleLevelCompletion(int level) {
+        Button completeButton;
+        String message;
+        int levelIndex = level - 1;
+        
+        switch (level) {
+            case 1:
+                completeButton = completeButton1;
+                message = "מעולה! הצלחת! עכשיו תעבור לשלב השני";
+                break;
+            case 2:
+                completeButton = completeButton2;
+                message = "מעולה! הצלחת! עכשיו תעבור לשלב השלישי";
+                break;
+            case 3:
+                completeButton = completeButton3;
+                message = "מעולה! הצלחת! עכשיו תעבור לשלב הרביעי";
+                break;
+            case 4:
+                completeButton = completeButton4;
+                message = "מעולה! הצלחת! עכשיו תעבור לשלב החמישי";
+                break;
+            case 5:
+                completeButton = completeButton5;
+                message = "מעולה! הצלחת! סיימת את כל השלבים!";
+                break;
+            default:
+                return;
+        }
 
-        completeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LevelMuscleUpp.this, "כל הכבוד! השלמת את השלב", Toast.LENGTH_SHORT).show();
-                completeButton.setEnabled(false);
-            }
-        });
+        // החלפת מצב ההשלמה
+        isCompleted[levelIndex] = !isCompleted[levelIndex];
+
+        // שינוי הטקסט בהתאם למצב
+        if (isCompleted[levelIndex]) {
+            completeButton.setText("✓");
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        } else {
+            completeButton.setText("הצלחתי");
+        }
     }
 
     @Override

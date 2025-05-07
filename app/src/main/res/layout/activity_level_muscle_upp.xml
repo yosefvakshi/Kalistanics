@@ -57,21 +57,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <Button
-                        android:id="@+id/completeButton1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF" />
+                    android:padding="4dp">
 
                     <include
                         android:id="@+id/cards1"
                         layout="@layout/exercise_cards" />
+
+                    <Button
+                        android:id="@+id/completeButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="2dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -94,21 +97,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <Button
-                        android:id="@+id/completeButton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF" />
+                    android:padding="4dp">
 
                     <include
                         android:id="@+id/cards2"
                         layout="@layout/exercise_cards" />
+
+                    <Button
+                        android:id="@+id/completeButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="2dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -131,21 +137,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <Button
-                        android:id="@+id/completeButton3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF" />
+                    android:padding="4dp">
 
                     <include
                         android:id="@+id/cards3"
                         layout="@layout/exercise_cards" />
+
+                    <Button
+                        android:id="@+id/completeButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="2dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -168,21 +177,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <Button
-                        android:id="@+id/completeButton4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF" />
+                    android:padding="4dp">
 
                     <include
                         android:id="@+id/cards4"
                         layout="@layout/exercise_cards" />
+
+                    <Button
+                        android:id="@+id/completeButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="2dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -205,21 +217,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <Button
-                        android:id="@+id/completeButton5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF" />
+                    android:padding="4dp">
 
                     <include
                         android:id="@+id/cards5"
                         layout="@layout/exercise_cards" />
+
+                    <Button
+                        android:id="@+id/completeButton5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="2dp"
+                        android:background="@drawable/round_button"
+                        android:text="הצלחתי"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
                 </LinearLayout>
             </HorizontalScrollView>
 
