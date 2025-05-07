@@ -1,5 +1,6 @@
 package com.example.kalistanics;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -8,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.SeekBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +26,23 @@ public class LevelMuscleUpp extends AppCompatActivity {
     private boolean isLevel4Open = false;
     private boolean isLevel5Open = false;
     private boolean[] isCompleted = new boolean[5];
+    private DatabaseHelper dbHelper;
+    private long currentChallengeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_muscle_upp);
+
+        dbHelper = new DatabaseHelper(this);
+
+        // קבלת מזהה האתגר מה-Intent
+        currentChallengeId = getIntent().getLongExtra("challenge_id", -1);
+        if (currentChallengeId == -1) {
+            Toast.makeText(this, "שגיאה בטעינת האתגר", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         // אתחול כפתורים
         button1 = findViewById(R.id.button1);
@@ -52,6 +65,9 @@ public class LevelMuscleUpp extends AppCompatActivity {
         scrollView4 = findViewById(R.id.scrollView4);
         scrollView5 = findViewById(R.id.scrollView5);
 
+        // טעינת נתונים מהמסד
+        loadLevelData();
+
         // הגדרת מאזיני לחיצה לכפתורים
         button1.setOnClickListener(v -> toggleLevel(1));
         button2.setOnClickListener(v -> toggleLevel(2));
@@ -65,25 +81,43 @@ public class LevelMuscleUpp extends AppCompatActivity {
         completeButton3.setOnClickListener(v -> handleLevelCompletion(3));
         completeButton4.setOnClickListener(v -> handleLevelCompletion(4));
         completeButton5.setOnClickListener(v -> handleLevelCompletion(5));
+    }
 
-        // הגדרת מאזין לשינוי ב-SeekBar
-        SeekBar scrollBar = findViewById(R.id.scrollBar);
-        scrollBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
-                    int maxScroll = scrollView1.getChildAt(0).getWidth() - scrollView1.getWidth();
-                    int scrollTo = (progress * maxScroll) / 100;
-                    scrollView1.scrollTo(scrollTo, 0);
-                }
-            }
+    private void loadLevelData() {
+        // טעינת נתונים לכל שלב
+        loadTrainingsForLevel(1, scrollView1);
+        loadTrainingsForLevel(2, scrollView2);
+        loadTrainingsForLevel(3, scrollView3);
+        loadTrainingsForLevel(4, scrollView4);
+        loadTrainingsForLevel(5, scrollView5);
+    }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
+    private void loadTrainingsForLevel(int levelNumber, HorizontalScrollView scrollView) {
+        // יצירת מיכל לתרגילים
+        LinearLayout container = new LinearLayout(this);
+        container.setOrientation(LinearLayout.HORIZONTAL);
+        scrollView.addView(container);
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
+        // קבלת התרגילים מהמסד
+        Cursor cursor = dbHelper.getTrainingsForLevel(levelNumber);
+        while (cursor.moveToNext()) {
+            String description = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TRAINING_DESCRIPTION));
+            String imageName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TRAINING_IMAGE));
+
+            // יצירת תצוגת תרגיל
+            View exerciseView = getLayoutInflater().inflate(R.layout.exercise_cards, container, false);
+            
+            ImageView imageView = exerciseView.findViewById(R.id.image1);
+            TextView textView = exerciseView.findViewById(R.id.text1);
+
+            // הגדרת תמונה וטקסט
+            int imageResource = getResources().getIdentifier(imageName, "drawable", getPackageName());
+            imageView.setImageResource(imageResource);
+            textView.setText(description);
+
+            container.addView(exerciseView);
+        }
+        cursor.close();
     }
 
     private void toggleLevel(int level) {
@@ -170,6 +204,14 @@ public class LevelMuscleUpp extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (dbHelper != null) {
+            dbHelper.close();
+        }
     }
 }
 

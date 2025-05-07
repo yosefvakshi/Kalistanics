@@ -3,112 +3,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BFB6B6"
-    android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="24dp"
         android:gravity="center"
-        android:text="תרגילי קליסטניקס"
-        android:textSize="18sp" />
+        android:text="אתגרי קליסטניקס"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <!-- כפתור ראשון עם תמונה -->
-
-    <!-- כפתור שני עם תמונה -->
-    <LinearLayout
-        android:id="@+id/layout1"
+    <Button
+        android:id="@+id/button1"
         android:layout_width="match_parent"
-        android:layout_height="11dp"
-        android:layout_weight="1"
-        android:backgroundTint="#F41C1C"
-        android:gravity="start"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:text="אתגר 1" />
 
-        <ImageView
-            android:id="@+id/myImage"
-            android:layout_width="88dp"
-            android:layout_height="48dp"
-            android:src="@drawable/muscle_upp" />
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="250dp"
-            android:layout_height="51dp"
-            android:background="@drawable/button_background"
-            android:backgroundTint="#AB1515"
-            android:text="לתרגיל כוח" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout2"
+    <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="start"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:text="אתגר 2" />
 
-        <ImageView
-            android:id="@+id/myImage2"
-            android:layout_width="88dp"
-            android:layout_height="48dp"
-            android:src="@drawable/muscle_upp" />
-
-        <Button
-            android:id="@+id/myButton2"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button_background"
-            android:text="לתרגיל פלאנץ" />
-    </LinearLayout>
-
-    <!-- כפתור שלישי עם תמונה -->
-    <LinearLayout
+    <Button
+        android:id="@+id/button3"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="start"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:text="אתגר 3" />
 
-        <ImageView
-            android:id="@+id/myImage3"
-            android:layout_width="88dp"
-            android:layout_height="48dp"
-            android:src="@drawable/muscle_upp" />
-
-        <Button
-            android:id="@+id/myButton3"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button_background"
-            android:text="לתרגיל פרונט" />
-    </LinearLayout>
-
-    <!-- כפתור רביעי עם תמונה -->
-    <LinearLayout
+    <Button
+        android:id="@+id/button4"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="start"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/myImage4"
-            android:layout_width="88dp"
-            android:layout_height="48dp"
-            android:src="@drawable/muscle_upp" />
-
-        <Button
-            android:id="@+id/myButton4"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button_background"
-            android:text="לתרגיל באק לבר" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:text="אתגר 4" />
 
 </LinearLayout>
 

@@ -1,243 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:id="@+id/main"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fadeScrollbars="false"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginBottom="8dp"
+            android:text="Level 1" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:gravity="center"
-                android:text="שלבים לתרגיל"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <HorizontalScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
-            <SeekBar
-                android:id="@+id/scrollBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:max="100"
-                android:progress="0"
-                android:progressDrawable="@drawable/seekbar_progress"
-                android:thumb="@drawable/seekbar_thumb"
-                android:layout_gravity="center" />
+        <Button
+            android:id="@+id/completeButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="הצלחתי" />
 
-            <!-- שלב 1 -->
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/button_background"
-                android:text="Level 1" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Level 2" />
 
-            <HorizontalScrollView
-                android:id="@+id/scrollView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
+        <HorizontalScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
+        <Button
+            android:id="@+id/completeButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="הצלחתי" />
 
-                    <include
-                        android:id="@+id/cards1"
-                        layout="@layout/exercise_cards" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Level 3" />
 
-                    <Button
-                        android:id="@+id/completeButton1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="2dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF"
-                        android:textSize="11sp"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp" />
-                </LinearLayout>
-            </HorizontalScrollView>
+        <HorizontalScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
-            <!-- שלב 2 -->
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/button_background"
-                android:text="Level 2" />
+        <Button
+            android:id="@+id/completeButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="הצלחתי" />
 
-            <HorizontalScrollView
-                android:id="@+id/scrollView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Level 4" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
+        <HorizontalScrollView
+            android:id="@+id/scrollView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
-                    <include
-                        android:id="@+id/cards2"
-                        layout="@layout/exercise_cards" />
+        <Button
+            android:id="@+id/completeButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="הצלחתי" />
 
-                    <Button
-                        android:id="@+id/completeButton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="2dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF"
-                        android:textSize="11sp"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp" />
-                </LinearLayout>
-            </HorizontalScrollView>
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Level 5" />
 
-            <!-- שלב 3 -->
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/button_background"
-                android:text="Level 3" />
+        <HorizontalScrollView
+            android:id="@+id/scrollView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
-            <HorizontalScrollView
-                android:id="@+id/scrollView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
+        <Button
+            android:id="@+id/completeButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="הצלחתי" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-
-                    <include
-                        android:id="@+id/cards3"
-                        layout="@layout/exercise_cards" />
-
-                    <Button
-                        android:id="@+id/completeButton3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="2dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF"
-                        android:textSize="11sp"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp" />
-                </LinearLayout>
-            </HorizontalScrollView>
-
-            <!-- שלב 4 -->
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/button_background"
-                android:text="Level 4" />
-
-            <HorizontalScrollView
-                android:id="@+id/scrollView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-
-                    <include
-                        android:id="@+id/cards4"
-                        layout="@layout/exercise_cards" />
-
-                    <Button
-                        android:id="@+id/completeButton4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="2dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF"
-                        android:textSize="11sp"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp" />
-                </LinearLayout>
-            </HorizontalScrollView>
-
-            <!-- שלב 5 -->
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/button_background"
-                android:text="Level 5" />
-
-            <HorizontalScrollView
-                android:id="@+id/scrollView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-
-                    <include
-                        android:id="@+id/cards5"
-                        layout="@layout/exercise_cards" />
-
-                    <Button
-                        android:id="@+id/completeButton5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="2dp"
-                        android:background="@drawable/round_button"
-                        android:text="הצלחתי"
-                        android:textColor="#FFFFFF"
-                        android:textSize="11sp"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp" />
-                </LinearLayout>
-            </HorizontalScrollView>
-
-        </LinearLayout>
-    </ScrollView>
-</RelativeLayout>
+    </LinearLayout>
+</ScrollView>

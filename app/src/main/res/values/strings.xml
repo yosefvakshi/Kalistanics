@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kalistanics</string>
+    <string name="app_name">קליסטניקס</string>
+    <string name="challenge_title">אתגרי קליסטניקס</string>
+    <string name="level_title">שלבים לתרגיל</string>
+    <string name="success_button">הצלחתי</string>
+    <string name="success_message">כל הכבוד! השלמת את השלב בהצלחה</string>
+    <string name="level_reopened">השלב נפתח מחדש</string>
+    <string name="error_loading_challenge">שגיאה בטעינת האתגר</string>
 </resources>

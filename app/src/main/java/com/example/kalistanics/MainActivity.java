@@ -1,66 +1,57 @@
 package com.example.kalistanics;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button myButton = findViewById(R.id.button1);
-        Button myButton2 = findViewById(R.id.myButton2);
+        dbHelper = new DatabaseHelper(this);
 
-        if (myButton == null || myButton2 == null) {
-            Toast.makeText(this, "שגיאה: כפתור לא נמצא ב-XML", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        // הגדרת כפתורים
+        Button button1 = findViewById(R.id.button1);
+        Button button2 = findViewById(R.id.button2);
+        Button button3 = findViewById(R.id.button3);
+        Button button4 = findViewById(R.id.button4);
 
-        myButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LevelMuscleUpp.class);
-                startActivity(intent);
-            }
-        });
-
-        myButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "כפתור 2 נלחץ", Toast.LENGTH_SHORT).show();
-            }
-        });
+        // הגדרת מאזיני לחיצה
+        button1.setOnClickListener(v -> openChallenge(1));
+        button2.setOnClickListener(v -> openChallenge(2));
+        button3.setOnClickListener(v -> openChallenge(3));
+        button4.setOnClickListener(v -> openChallenge(4));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
+    private void openChallenge(int challengeNumber) {
+        // קבלת מזהה האתגר מהמסד
+        Cursor cursor = dbHelper.getAllChallenges();
+        if (cursor.moveToPosition(challengeNumber - 1)) {
+            long challengeId = cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COLUMN_CHALLENGE_ID));
+            cursor.close();
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_exit) {
-            finishAffinity();
-            return true;
-        } else if (item.getItemId() == R.id.action_main) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            // פתיחת דף השלבים עם מזהה האתגר
+            Intent intent = new Intent(this, LevelMuscleUpp.class);
+            intent.putExtra("challenge_id", challengeId);
             startActivity(intent);
-            return true;
+        } else {
+            Toast.makeText(this, "שגיאה בטעינת האתגר", Toast.LENGTH_SHORT).show();
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (dbHelper != null) {
+            dbHelper.close();
+        }
     }
 }
